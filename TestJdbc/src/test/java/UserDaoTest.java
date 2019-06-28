@@ -1,7 +1,11 @@
+import dao.DBConnect;
 import dao.UserDao;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoSession;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.*;
@@ -18,19 +22,29 @@ public class UserDaoTest {
 
   @Test
   public void findByNameTest() throws SQLException {
-    doThrow(new RuntimeException()).when(us).findByName("a");
+    String name = "Name";
+    String wrong = "bad request";
+    us.findByName(name);
+    doThrow(new SQLException()).when(us).findByName(wrong);
+    verify(us).findByName(name);
+
   }
 
   @Test
   public void replaceSurname() {
-    doThrow(new RuntimeException()).when(us).replaceSurname("", "");
+    String name = "Name";
+    String newSurname = "Surname";
+    us.replaceSurname(name,newSurname);
+    doThrow(new RuntimeException()).when(us).replaceSurname("badName", "badSurname");
+    verify(us).replaceSurname(name,newSurname);
   }
 
 
   @Test
   public void showTable() throws SQLException {
+    us.showTable();
     doThrow(new RuntimeException()).when(us).showTable();
+    verify(us).showTable();
   }
-
 
 }

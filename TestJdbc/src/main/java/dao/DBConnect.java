@@ -38,6 +38,7 @@ public class DBConnect {
     dbConnection.close();
     return s;
   }
+
   //Метод отправляет запрос на изменение фамилии если пользователь был найден.
   protected static String replaceSurname(String name, String newSurname) {
     String s;
@@ -66,6 +67,7 @@ public class DBConnect {
     }
     return s;
   }
+
   //метод выводит таблицу для просмотра
   protected static void showTable() throws SQLException {
     dbConnection = getConnections();
